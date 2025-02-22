@@ -6,24 +6,28 @@ import Carousel from "./Carousel"
 
 const carouselItems = {
   hats: [
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
-    "/placeholder.svg?height=100&width=100",
+    "/assets/hat1.png",
+    "/assets/hat2.png",
   ],
   torsos: [
-    "/placeholder.svg?height=200&width=150",
-    "/placeholder.svg?height=200&width=150",
-    "/placeholder.svg?height=200&width=150",
+    "/assets/shirt1.jpg",
+    "/assets/shirt2.png",
+    "/assets/shirt3.png",
+    "/assets/hoodie1.png",
+    "/assets/hoodie2.png",
+    "/assets/hoodie3.png",
   ],
   pants: [
-    "/placeholder.svg?height=250&width=150",
-    "/placeholder.svg?height=250&width=150",
-    "/placeholder.svg?height=250&width=150",
+    "/assets/shorts1.png",
+    "/assets/pants1.png",
+    "/assets/pants2.png",
+    "/assets/pants3.png",
   ],
   shoes: [
-    "/placeholder.svg?height=100&width=150",
-    "/placeholder.svg?height=100&width=150",
-    "/placeholder.svg?height=100&width=150",
+    "/assets/shoes1.jpg",
+    "/assets/shoes2.png",
+    "/assets/shoes3.png",
+    "/assets/shoes4.png"
   ],
 }
 
