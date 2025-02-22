@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fits
 
-## Getting Started
+## Overview
+Fits is a web application that recommends personalized outfits based on events, weather, and user preferences. The project uses AI to analyze clothing items, interpret styles, and generate outfit suggestions.
 
-First, run the development server:
+## Features
+- AI-powered outfit recommendations
+- Weather-based clothing suggestions
+- Event-specific styling advice
+- User-friendly carousel to browse outfit options
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+- **Frontend:** Next.js (React), Tailwind CSS
+- **Backend:** Next.js
+- **Database:** MongoDB
+- **AI Integration:** ViT-Base AI
+
+## Installation & Setup
+### Prerequisites
+- Node.js & npm
+- MongoDB
+
+### Steps
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/yourusername/outfit-generator.git
+   cd outfit-generator
+   ```
+2. **Install Frontend Dependencies**
+   ```sh
+   cd frontend
+   npm install
+   ```
+3. **Run the Frontend**
+   ```sh
+   npm run dev
+   ```
+4. **Setup Backend**
+   - If using Flask:
+     ```sh
+     cd backend
+     pip install -r requirements.txt
+     python app.py
+     ```
+   - If using Spring Boot:
+     ```sh
+     cd backend
+     ./mvnw spring-boot:run
+     ```
+5. **Run MongoDB** (if not using a cloud database)
+   ```sh
+   mongod --dbpath ./data
+   ```
+
+## Folder Structure
+```
+├── src
+│   ├── app
+│   │   ├── components
+│   │   │   ├── ui
+│   │   │   │   ├── button.js
+│   │   │   │   ├── card.js
+│   │   ├── changing-room
+│   │   │   ├── carousel-section.js
+│   ├── pages
+│   ├── styles
+├── backend
+│   ├── app.py (Flask backend)
+│   ├── server.js (Node.js backend alternative)
+│   ├── src (Spring Boot alternative)
+├── public
+│   ├── assets
+├── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature-name`)
+3. **Commit your changes** (`git commit -m 'Add feature'`)
+4. **Push to the branch** (`git push origin feature-name`)
+5. **Create a Pull Request**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## License
+This project is licensed under the MIT License.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact
+For questions or contributions, reach out via [your email or GitHub].
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
