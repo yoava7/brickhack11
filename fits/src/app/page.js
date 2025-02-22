@@ -3,7 +3,7 @@ import Link from "next/link"
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6">Welcome to Your Fashion Hub</h1>
+      <h1 className="text-4xl font-bold mb-6">Does it fit?</h1>
       <p className="text-xl mb-8">Discover, organize, and style your perfect outfits.</p>
 
       <div className="grid md:grid-cols-2 gap-6">

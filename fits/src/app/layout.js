@@ -5,7 +5,7 @@ import Link from "next/link"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Fashion Hub",
+  title: "Fits",
   description: "Discover, organize, and style your perfect outfits",
 }
 
