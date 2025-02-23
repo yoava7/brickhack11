@@ -1,20 +1,20 @@
-"use client";  // 👈 Important! This must be here
+"use client";  
 
 import { useState } from "react";
 
 export default function UploadButton() {
     const [imageUrl, setImageUrl] = useState("");
-    const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
 
     const handleUpload = async () => {
+        if (!imageUrl.trim()) {
+            setMessage("Please enter an image URL.");
+            return;
+        }
+
         try {
-            const response = await fetch("/api/upload", {  // 👈 Make sure this matches your API route
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ imageUrl, description })
+            const response = await fetch(`/api/insert_clothing?url=${encodeURIComponent(imageUrl)}`, {
+                method: "GET",
             });
 
             const data = await response.json();
@@ -36,13 +36,6 @@ export default function UploadButton() {
                 placeholder="Image URL" 
                 value={imageUrl} 
                 onChange={(e) => setImageUrl(e.target.value)} 
-                className="border p-2 rounded mb-2 w-full"
-            />
-            <input 
-                type="text" 
-                placeholder="Description" 
-                value={description} 
-                onChange={(e) => setDescription(e.target.value)} 
                 className="border p-2 rounded mb-2 w-full"
             />
             <button 
