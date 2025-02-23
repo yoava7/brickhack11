@@ -92,11 +92,11 @@ export default function ChangingRoom() {
         </div>
 
         {/* Carousels */}
-        <div className="flex flex-col items-center gap-6 w-full">
-          <Carousel items={carouselItems.hats} title="" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
-          <Carousel items={carouselItems.torsos} title="" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
-          <Carousel items={carouselItems.pants} title="" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
-          <Carousel items={carouselItems.shoes} title="" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
+        <div className="flex flex-col items-center gap-4 w-full">
+          <Carousel items={carouselItems.hats} title="Hat" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
+          <Carousel items={carouselItems.torsos} title="Torso" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
+          <Carousel items={carouselItems.pants} title="Pants" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
+          <Carousel items={carouselItems.shoes} title="Shoes" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
         </div>
       </div>
     </div>
