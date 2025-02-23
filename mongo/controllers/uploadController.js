@@ -1,4 +1,4 @@
-const Image = require("../models/Image.js"); // Import model
+const Image = require("../models/image.js"); // Import model
 
 // Upload Image Handler
 const uploadImage = async (req, res) => {
