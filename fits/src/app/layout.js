@@ -6,7 +6,7 @@ import Header from "./header"
 const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "digiFit",
-  description: "Discover, fart, and style your perfect outfits",
+  description: "Discover, organize, and style your perfect outfits",
 }
 
 export default function RootLayout({ children }) {

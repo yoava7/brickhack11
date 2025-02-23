@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Carousel from "./Carousel"
-import { Wand2 } from "lucide-react"
+import { useState } from "react";
+import Carousel from "./Carousel";
+import { Wand2 } from "lucide-react";
 
 const carouselItems = {
   hats: ["/assets/hat1.png", "/assets/hat2.png"],
@@ -16,13 +16,13 @@ const carouselItems = {
   ],
   pants: ["/assets/shorts1.png", "/assets/pants1.png", "/assets/pants2.png", "/assets/pants3.png"],
   shoes: ["/assets/shoes1.jpg", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
-}
+};
 
 interface LockedState {
-  hat: boolean
-  torso: boolean
-  pants: boolean
-  shoes: boolean
+  hat: boolean;
+  torso: boolean;
+  pants: boolean;
+  shoes: boolean;
 }
 
 export default function ChangingRoom() {
@@ -31,99 +31,73 @@ export default function ChangingRoom() {
     torso: carouselItems.torsos[0],
     pants: carouselItems.pants[0],
     shoes: carouselItems.shoes[0],
-  })
+  });
 
   const [lockedItems, setLockedItems] = useState<LockedState>({
     hat: false,
     torso: false,
     pants: false,
     shoes: false,
-  })
+  });
 
   const updateOutfit = (category: keyof typeof outfit, item: string) => {
     if (!lockedItems[category]) {
       setOutfit((prevOutfit) => ({
         ...prevOutfit,
         [category]: item,
-      }))
+      }));
     }
-  }
+  };
 
   const handleLockChange = (category: keyof typeof outfit, isLocked: boolean) => {
     setLockedItems((prev) => ({
       ...prev,
       [category]: isLocked,
-    }))
-  }
+    }));
+  };
 
   const generateRandomOutfit = () => {
-    const newOutfit = { ...outfit }
+    const newOutfit = { ...outfit };
 
     if (!lockedItems.hat) {
-      newOutfit.hat = carouselItems.hats[Math.floor(Math.random() * carouselItems.hats.length)]
+      newOutfit.hat = carouselItems.hats[Math.floor(Math.random() * carouselItems.hats.length)];
     }
     if (!lockedItems.torso) {
-      newOutfit.torso = carouselItems.torsos[Math.floor(Math.random() * carouselItems.torsos.length)]
+      newOutfit.torso = carouselItems.torsos[Math.floor(Math.random() * carouselItems.torsos.length)];
     }
     if (!lockedItems.pants) {
-      newOutfit.pants = carouselItems.pants[Math.floor(Math.random() * carouselItems.pants.length)]
+      newOutfit.pants = carouselItems.pants[Math.floor(Math.random() * carouselItems.pants.length)];
     }
     if (!lockedItems.shoes) {
-      newOutfit.shoes = carouselItems.shoes[Math.floor(Math.random() * carouselItems.shoes.length)]
+      newOutfit.shoes = carouselItems.shoes[Math.floor(Math.random() * carouselItems.shoes.length)];
     }
 
-    setOutfit(newOutfit)
-  }
+    setOutfit(newOutfit);
+  };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#CCDBDC] px-4 py-6">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6" style={{ backgroundColor: "#FAF9F6"}}>
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold mb-8 text-center">Digifit</h1>
+        <p style={{ fontFamily:'Arial Narrow'}} className="text-center mb-6 text-lg">:P</p>
 
         {/* Generate Button */}
-        <div className="flex justify-center mb-8">
+        <div style={{fontFamily:'Arial Narrow'}} className="flex justify-center mb-4">
           <button
             onClick={generateRandomOutfit}
-            className="flex items-center gap-2 px-6 py-3 bg-[#80CED7] text-white rounded-full hover:bg-[#6bb5bd] transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
-            <Wand2 className="w-5 h-5" />
             Generate Outfit
           </button>
         </div>
 
         {/* Carousels */}
-        <div className="flex flex-col items-center gap-8 w-full">
-          <Carousel
-            items={carouselItems.hats}
-            onSelect={(item) => updateOutfit("hat", item)}
-            onLockChange={(isLocked) => handleLockChange("hat", isLocked)}
-            initialLocked={lockedItems.hat}
-            currentItem={outfit.hat}
-          />
-          <Carousel
-            items={carouselItems.torsos}
-            onSelect={(item) => updateOutfit("torso", item)}
-            onLockChange={(isLocked) => handleLockChange("torso", isLocked)}
-            initialLocked={lockedItems.torso}
-            currentItem={outfit.torso}
-          />
-          <Carousel
-            items={carouselItems.pants}
-            onSelect={(item) => updateOutfit("pants", item)}
-            onLockChange={(isLocked) => handleLockChange("pants", isLocked)}
-            initialLocked={lockedItems.pants}
-            currentItem={outfit.pants}
-          />
-          <Carousel
-            items={carouselItems.shoes}
-            onSelect={(item) => updateOutfit("shoes", item)}
-            onLockChange={(isLocked) => handleLockChange("shoes", isLocked)}
-            initialLocked={lockedItems.shoes}
-            currentItem={outfit.shoes}
-          />
+        <div className="flex flex-col items-center gap-4 w-full">
+          <Carousel items={carouselItems.hats} title="" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
+          <Carousel items={carouselItems.torsos} title="" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
+          <Carousel items={carouselItems.pants} title="" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
+          <Carousel items={carouselItems.shoes} title="" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
         </div>
       </div>
     </div>
-  )
+  );
 }
-
