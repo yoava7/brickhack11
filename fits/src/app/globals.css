@@ -9,9 +9,13 @@
 }
 
 @font-face {
-  font-family: "Arial Narrow";  /* Use any name you like */
+  font-family: "Arial Narrow"; 
   src: local("Arial Narrow"),
        url("./fonts/arialnarrow.ttf") format("truetype");
+}
+
+.home-page-bg {
+  background-color: #5F634F; 
 }
 
 body {

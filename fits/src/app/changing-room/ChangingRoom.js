@@ -39,7 +39,7 @@ export default function ChangingRoom() {
     shoes: carouselItems.shoes[0],
   })
 
-  const updateOutfit = (category, item) => {
+  const updateOutfit = (category, item) => {;
     setOutfit((prevOutfit) => ({
       ...prevOutfit,
       [category]: item,
@@ -60,33 +60,6 @@ export default function ChangingRoom() {
           <Carousel items={carouselItems.shoes} title="Shoes" onSelect={(item) => updateOutfit("shoes", item)} />
         </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Your Outfit</h2>
-          <div className="bg-gray-100 p-4 rounded-lg flex flex-col items-center">
-            <Image
-              src={outfit.hat || "/placeholder.svg"}
-              alt="Selected hat"
-              width={100}
-              height={100}
-              className="mb-2"
-            />
-            <Image
-              src={outfit.torso || "/placeholder.svg"}
-              alt="Selected top"
-              width={150}
-              height={200}
-              className="mb-2"
-            />
-            <Image
-              src={outfit.pants || "/placeholder.svg"}
-              alt="Selected pants"
-              width={150}
-              height={250}
-              className="mb-2"
-            />
-            <Image src={outfit.shoes || "/placeholder.svg"} alt="Selected shoes" width={150} height={100} />
-          </div>
-        </div>
       </div>
     </div>
   )
