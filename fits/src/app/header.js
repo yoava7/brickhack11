@@ -35,7 +35,7 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/closet" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial_Narrow" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/closet" className="text-gray-800 hover:text-primary transition-colors duration-300 font-ArialNarrow" onClick={() => setIsMenuOpen(false)}>
                   Closet
                 </Link>
               </li>
