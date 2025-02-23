@@ -30,7 +30,7 @@ export default function UploadButton() {
 
     return (
         <div className="p-4 border rounded-lg">
-            <h2 className="text-lg font-semibold mb-2">Upload an Image</h2>
+            <h2 className="text-lg font-semibold mb-2">Upload your Closet</h2>
             <input 
                 type="text" 
                 placeholder="Image URL" 
