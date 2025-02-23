@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Wand2 } from "lucide-react"
-import Carousel from "./Carousel"
+import { useState } from "react";
+import Carousel from "./Carousel";
+import { Wand2 } from "lucide-react";
 
 const carouselItems = {
   hats: ["/assets/hat1.png", "/assets/hat2.png"],
@@ -16,13 +16,13 @@ const carouselItems = {
   ],
   pants: ["/assets/shorts1.png", "/assets/pants1.png", "/assets/pants2.png", "/assets/pants3.png"],
   shoes: ["/assets/shoes1.jpg", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
-}
+};
 
 interface LockedState {
-  hat: boolean
-  torso: boolean
-  pants: boolean
-  shoes: boolean
+  hat: boolean;
+  torso: boolean;
+  pants: boolean;
+  shoes: boolean;
 }
 
 export default function ChangingRoom() {
@@ -31,114 +31,74 @@ export default function ChangingRoom() {
     torso: carouselItems.torsos[0],
     pants: carouselItems.pants[0],
     shoes: carouselItems.shoes[0],
-  })
+  });
 
   const [lockedItems, setLockedItems] = useState<LockedState>({
     hat: false,
     torso: false,
     pants: false,
     shoes: false,
-  })
+  });
 
   const updateOutfit = (category: keyof typeof outfit, item: string) => {
     if (!lockedItems[category]) {
       setOutfit((prevOutfit) => ({
         ...prevOutfit,
         [category]: item,
-      }))
+      }));
     }
-  }
+  };
 
   const handleLockChange = (category: keyof typeof outfit, isLocked: boolean) => {
     setLockedItems((prev) => ({
       ...prev,
       [category]: isLocked,
-    }))
-  }
+    }));
+  };
 
   const generateRandomOutfit = () => {
-    const newOutfit = { ...outfit }
+    const newOutfit = { ...outfit };
 
     if (!lockedItems.hat) {
-      const randomHat = Math.floor(Math.random() * carouselItems.hats.length) + 1
-      newOutfit.hat = `/assets/hat${randomHat}.png`
+      newOutfit.hat = carouselItems.hats[Math.floor(Math.random() * carouselItems.hats.length)];
     }
-
     if (!lockedItems.torso) {
-      const isHoodie = Math.random() < 0.5
-      const randomNum = Math.floor(Math.random() * (isHoodie ? 3 : 3)) + 1
-      newOutfit.torso = `/assets/${isHoodie ? "hoodie" : "shirt"}${randomNum}.png`
+      newOutfit.torso = carouselItems.torsos[Math.floor(Math.random() * carouselItems.torsos.length)];
     }
-
     if (!lockedItems.pants) {
-      const isShorts = Math.random() < 0.25
-      const randomNum = Math.floor(Math.random() * (isShorts ? 1 : 3)) + 1
-      newOutfit.pants = `/assets/${isShorts ? "shorts" : "pants"}${randomNum}.png`
+      newOutfit.pants = carouselItems.pants[Math.floor(Math.random() * carouselItems.pants.length)];
     }
-
     if (!lockedItems.shoes) {
-      const randomShoes = Math.floor(Math.random() * carouselItems.shoes.length) + 1
-      newOutfit.shoes = `/assets/shoes${randomShoes}.png`
+      newOutfit.shoes = carouselItems.shoes[Math.floor(Math.random() * carouselItems.shoes.length)];
     }
 
-    setOutfit(newOutfit)
-  }
+    setOutfit(newOutfit);
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="max-w-3xl w-full px-4 py-8">
-        <p className="text-center mb-8" style={{ fontFamily: "Arial Narrow" }}>
-          Create and visualize your outfits here.
-        </p>
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6">
+      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
+        <p className="text-center mb-6 text-lg font-semibold">Create and visualize your outfits here.</p>
 
-        <div className="flex flex-col items-center gap-8">
-          <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-bold" style={{ fontFamily: "Arial Narrow" }}>
-              Select Your Outfit
-            </h2>
-            <button
-              onClick={generateRandomOutfit}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-              style={{ fontFamily: "Arial Narrow" }}
-            >
-              Generate
-            </button>
-          </div>
-          <Carousel
-            items={carouselItems.hats}
-            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
-            onSelect={(item) => updateOutfit("hat", item)}
-            onLockChange={(isLocked) => handleLockChange("hat", isLocked)}
-            initialLocked={lockedItems.hat}
-            currentItem={outfit.hat}
-          />
-          <Carousel
-            items={carouselItems.torsos}
-            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
-            onSelect={(item) => updateOutfit("torso", item)}
-            onLockChange={(isLocked) => handleLockChange("torso", isLocked)}
-            initialLocked={lockedItems.torso}
-            currentItem={outfit.torso}
-          />
-          <Carousel
-            items={carouselItems.pants}
-            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
-            onSelect={(item) => updateOutfit("pants", item)}
-            onLockChange={(isLocked) => handleLockChange("pants", isLocked)}
-            initialLocked={lockedItems.pants}
-            currentItem={outfit.pants}
-          />
-          <Carousel
-            items={carouselItems.shoes}
-            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
-            onSelect={(item) => updateOutfit("shoes", item)}
-            onLockChange={(isLocked) => handleLockChange("shoes", isLocked)}
-            initialLocked={lockedItems.shoes}
-            currentItem={outfit.shoes}
-          />
+        {/* Generate Button */}
+        <div className="flex justify-center mb-4">
+          <button
+            onClick={generateRandomOutfit}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          >
+            <Wand2 className="w-5 h-5" />
+            Generate Outfit
+          </button>
+        </div>
+
+        {/* Carousels */}
+        <div className="flex flex-col items-center gap-6 w-full">
+          <Carousel items={carouselItems.hats} title="" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
+          <Carousel items={carouselItems.torsos} title="" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
+          <Carousel items={carouselItems.pants} title="" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
+          <Carousel items={carouselItems.shoes} title="" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
         </div>
       </div>
     </div>
-  )
+  );
 }
-
