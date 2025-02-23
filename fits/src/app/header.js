@@ -24,23 +24,23 @@ export default function Header() {
           >
             <button
               className="md:hidden absolute top-6 right-6 text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}
             >
               <X className="h-6 w-6" />
             </button>
             <div className="flex flex-col md:flex-row items-center justify-center h-full md:h-auto space-y-8 md:space-y-0 md:space-x-8">
               <li>
-                <Link href="/" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/closet" className="text-gray-800 hover:text-primary transition-colors duration-300 font-ArialNarrow" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/closet" className="text-gray-800 hover:text-primary transition-colors duration-300 font-ArialNarrow" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}>
                   Closet
                 </Link>
               </li>
               <li>
-                <Link href="/changing-room" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial Narrow" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/changing-room" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial Narrow" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}>
                   Changing Room
                 </Link>
               </li>

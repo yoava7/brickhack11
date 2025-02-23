@@ -70,87 +70,84 @@ export default function Carousel({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 ">
         <h3 className="text-center font-bold">{title}</h3>
       </div>
-      <div className="relative h-[150px] overflow-hidden">
+      <div className="relative h-[50px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
-          {/* Navigation buttons */}
-          <button
-            onClick={handlePrev}
-            className={cn(
-              "absolute left-0 z-10 h-full px-4 text-2xl transition-colors",
-              isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
-            )}
-            disabled={isLocked}
-          >
-            {"<"}
-          </button>
+          {/* Navigation and content container */}
+          <div className="flex items-center gap-4">
+            {/* Prev button */}
+            <button
+              onClick={handlePrev}
+              className={cn(
+                "z-10 px-4 text-2xl transition-colors",
+                isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
+              )}
+              disabled={isLocked}
+            >
+              {"<"}
+            </button>
 
-          {/* Previous item */}
-          <div className="absolute left-8 transform -translate-x-1/2">
-            <div className={cn("blur-[2px]", isLocked && "opacity-30")}>
+            {/* Previous item */}
+            <div className={cn("opacity-50 blur-[2px]", isLocked && "opacity-30")}>
               <Image
-                src={items[getPrevIndex()] || "/placeholder.svg"}
-                alt="Previous Item"
-                width={100}
-                height={100}
+                src={items[getPrevIndex()]}
+                alt="Previous"
+                width={300}
+                height={300}
                 className="object-contain"
               />
             </div>
-          </div>
 
-          {/* Current item container */}
-          <div className="relative">
             {/* Current item */}
             <div className={cn("transform transition-transform duration-300 ease-in-out", isAnimating && "scale-105")}>
               <Image
-                src={items[currentIndex] || "/placeholder.svg"}
-                alt="Current Item"
-                width={120}
-                height={120}
+                src={items[currentIndex]}
+                alt="Current"
+                width={600}
+                height={600}
                 className="object-contain"
               />
             </div>
 
-            {/* Lock button positioned to the right of the current item */}
+            {/* Next item */}
+            <div className={cn("opacity-50 blur-[2px]", isLocked && "opacity-30")}>
+              <Image
+                src={items[getNextIndex()]}
+                alt="Next"
+                width={300}
+                height={300}
+                className="object-contain"
+              />
+            </div>
+
+            {/* Next button */}
+            <button
+              onClick={handleNext}
+              className={cn(
+                "z-10 px-4 text-2xl transition-colors",
+                isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
+              )}
+              disabled={isLocked}
+            >
+              {">"}
+            </button>
+
+            {/* Lock button */}
             <button
               onClick={toggleLock}
               className={cn(
-                "absolute -right-16 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors",
+                "p-2 rounded-full transition-colors",
                 isLocked
                   ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
                   : "bg-primary text-primary-foreground hover:bg-primary/90",
               )}
               style={{ fontFamily: "Arial Narrow" }}
             >
-              {isLocked ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+              {isLocked ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
             </button>
           </div>
-
-          {/* Next item */}
-          <div className="absolute right-8 transform translate-x-1/2">
-            <div className={cn("blur-[2px]", isLocked && "opacity-30")}>
-              <Image
-                src={items[getNextIndex()] || "/placeholder.svg"}
-                alt="Next Item"
-                width={100}
-                height={100}
-                className="object-contain"
-              />
-            </div>
-          </div>
-
-          <button
-            onClick={handleNext}
-            className={cn(
-              "absolute right-0 z-10 h-full px-4 text-2xl transition-colors",
-              isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
-            )}
-            disabled={isLocked}
-          >
-            {">"}
-          </button>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import Carousel from "./Carousel"
 const carouselItems = {
   hats: ["/assets/hat1.png", "/assets/hat2.png"],
   torsos: [
-    "/assets/shirt1.png",
+    "/assets/shirt1.jpg",
     "/assets/shirt2.png",
     "/assets/shirt3.png",
     "/assets/hoodie1.png",
@@ -15,7 +15,7 @@ const carouselItems = {
     "/assets/hoodie3.png",
   ],
   pants: ["/assets/shorts1.png", "/assets/pants1.png", "/assets/pants2.png", "/assets/pants3.png"],
-  shoes: ["/assets/shoes1.png", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
+  shoes: ["/assets/shoes1.jpg", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
 }
 
 interface LockedState {
@@ -87,7 +87,6 @@ export default function ChangingRoom() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-3xl w-full px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-6">Changing Room</h1>
         <p className="text-center mb-8" style={{ fontFamily: "Arial Narrow" }}>
           Create and visualize your outfits here.
         </p>
@@ -102,13 +101,12 @@ export default function ChangingRoom() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
               style={{ fontFamily: "Arial Narrow" }}
             >
-              <Wand2 className="w-4 h-4" />
               Generate
             </button>
           </div>
           <Carousel
             items={carouselItems.hats}
-            title={<span style={{ fontFamily: "Arial Narrow" }}>Hats</span>}
+            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
             onSelect={(item) => updateOutfit("hat", item)}
             onLockChange={(isLocked) => handleLockChange("hat", isLocked)}
             initialLocked={lockedItems.hat}
@@ -116,7 +114,7 @@ export default function ChangingRoom() {
           />
           <Carousel
             items={carouselItems.torsos}
-            title={<span style={{ fontFamily: "Arial Narrow" }}>Tops</span>}
+            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
             onSelect={(item) => updateOutfit("torso", item)}
             onLockChange={(isLocked) => handleLockChange("torso", isLocked)}
             initialLocked={lockedItems.torso}
@@ -124,7 +122,7 @@ export default function ChangingRoom() {
           />
           <Carousel
             items={carouselItems.pants}
-            title={<span style={{ fontFamily: "Arial Narrow" }}>Pants</span>}
+            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
             onSelect={(item) => updateOutfit("pants", item)}
             onLockChange={(isLocked) => handleLockChange("pants", isLocked)}
             initialLocked={lockedItems.pants}
@@ -132,7 +130,7 @@ export default function ChangingRoom() {
           />
           <Carousel
             items={carouselItems.shoes}
-            title={<span style={{ fontFamily: "Arial Narrow" }}>Shoes</span>}
+            title={<span style={{ fontFamily: "Arial Narrow" }}></span>}
             onSelect={(item) => updateOutfit("shoes", item)}
             onLockChange={(isLocked) => handleLockChange("shoes", isLocked)}
             initialLocked={lockedItems.shoes}
