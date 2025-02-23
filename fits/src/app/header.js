@@ -11,9 +11,9 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-500">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="relative w-24 h-12">
+          <div className="relative w-24 h-12" style={{ fontFamily: "Arial Narrow" }}>
             <Link href="/" className="text-xl font-bold">
-              Fits
+              digiFit
             </Link>
           </div>
 
@@ -28,7 +28,7 @@ export default function Header() {
             >
               <X className="h-6 w-6" />
             </button>
-            <div className="flex flex-col md:flex-row items-center justify-center h-full md:h-auto space-y-8 md:space-y-0 md:space-x-8">
+            <div className="flex flex-col md:flex-row items-center justify-center h-full md:h-auto space-y-8 md:space-y-0 md:space-x-8" style={{ fontFamily: "Arial Narrow" }}>
               <li>
                 <Link href="/" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial" onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}>
                   Home
