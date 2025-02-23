@@ -76,27 +76,26 @@ export default function ChangingRoom() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6" style={{ backgroundColor: "#FAF9F6"}}>
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
-        <p className="text-center mb-6 text-lg font-semibold">Create and visualize your outfits here.</p>
+        <p style={{ fontFamily:'Arial Narrow'}} className="text-center mb-6 text-lg">Create and visualize your outfits here.</p>
 
         {/* Generate Button */}
-        <div className="flex justify-center mb-4">
+        <div style={{fontFamily:'Arial Narrow'}} className="flex justify-center mb-4">
           <button
             onClick={generateRandomOutfit}
             className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
-            <Wand2 className="w-5 h-5" />
             Generate Outfit
           </button>
         </div>
 
         {/* Carousels */}
         <div className="flex flex-col items-center gap-4 w-full">
-          <Carousel items={carouselItems.hats} title="Hat" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
-          <Carousel items={carouselItems.torsos} title="Torso" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
-          <Carousel items={carouselItems.pants} title="Pants" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
-          <Carousel items={carouselItems.shoes} title="Shoes" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
+          <Carousel items={carouselItems.hats} title="" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
+          <Carousel items={carouselItems.torsos} title="" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
+          <Carousel items={carouselItems.pants} title="" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
+          <Carousel items={carouselItems.shoes} title="" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
         </div>
       </div>
     </div>

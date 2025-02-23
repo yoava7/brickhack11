@@ -45,12 +45,12 @@ export default function Carousel({ items, title, onSelect, onLockChange, initial
   };
 
   return (
-    <div className="w-full max-w-[180px] mx-auto flex flex-col items-center space-y-2">
+    <div className="w-full max-w-[120px] mx-auto flex flex-col items-center space-y-2">
       <h3 className="text-md font-bold">{title}</h3>
       <div className="flex items-center gap-2">
         <button onClick={handlePrev} className="px-2 py-1 bg-gray-200 rounded-full text-lg" disabled={isLocked}>{"<"}</button>
 
-        <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[150px] md:h-[150px] flex items-center justify-center">
+        <div className="w-[150px] h-[150px] sm:w-[150px] sm:h-[150px] md:w-[150x] md:h-[115px] flex items-center justify-center">
           <Image src={items[currentIndex]} alt="Current" width={150} height={150} className="object-contain w-full h-full" />
         </div>
 

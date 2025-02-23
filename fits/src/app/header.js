@@ -26,7 +26,6 @@ export default function Header() {
               className="md:hidden absolute top-6 right-6 text-gray-800"
               onClick={() => setIsMenuOpen(false)} style={{ fontFamily: "Arial Narrow" }}
             >
-              <X className="h-6 w-6" />
             </button>
             <div className="flex flex-col md:flex-row items-center justify-center h-full md:h-auto space-y-8 md:space-y-0 md:space-x-8" style={{ fontFamily: "Arial Narrow" }}>
               <li>
