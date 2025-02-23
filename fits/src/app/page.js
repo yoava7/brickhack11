@@ -23,7 +23,7 @@ export default function Home() {
             className="block p-6 bg-grey-100 rounded-lg shadow-md hover:bg-blue-200 transition duration-300"
           >
             <h2 className="text-2xl font-semibold mb-2">Changing Room</h2>
-            <p>Mix and match to create your perfect outfit.</p>
+            <p>Where the magic happens.</p>
           </Link>
         </div>
 
