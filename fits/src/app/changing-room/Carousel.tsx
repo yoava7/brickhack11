@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Lock, Unlock } from "lucide-react"
 import { cn } from "../../app/lib/utils"
@@ -13,25 +12,48 @@ interface CarouselProps {
   onSelect: (item: string) => void
   onLockChange?: (isLocked: boolean) => void
   initialLocked?: boolean
+  currentItem?: string
 }
 
-export default function Carousel({ items, title, onSelect, onLockChange, initialLocked = false }: CarouselProps) {
+export default function Carousel({
+  items,
+  title,
+  onSelect,
+  onLockChange,
+  initialLocked = false,
+  currentItem,
+}: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isLocked, setIsLocked] = useState(initialLocked)
+
+  useEffect(() => {
+    if (currentItem) {
+      const newIndex = items.indexOf(currentItem)
+      if (newIndex !== -1) {
+        setCurrentIndex(newIndex)
+      }
+    }
+  }, [currentItem, items])
 
   const handleNext = () => {
     if (isAnimating || isLocked) return
     setIsAnimating(true)
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
-    setTimeout(() => setIsAnimating(false), 300)
+    setTimeout(() => {
+      setIsAnimating(false)
+      onSelect(items[(currentIndex + 1) % items.length])
+    }, 300)
   }
 
   const handlePrev = () => {
     if (isAnimating || isLocked) return
     setIsAnimating(true)
     setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length)
-    setTimeout(() => setIsAnimating(false), 300)
+    setTimeout(() => {
+      setIsAnimating(false)
+      onSelect(items[(currentIndex - 1 + items.length) % items.length])
+    }, 300)
   }
 
   const toggleLock = () => {
@@ -50,7 +72,6 @@ export default function Carousel({ items, title, onSelect, onLockChange, initial
     <div className="w-full max-w-2xl mx-auto">
       <div className="flex items-center justify-center gap-2 mb-4">
         <h3 className="text-center font-bold">{title}</h3>
-        {isLocked && <Lock className="w-4 h-4 text-primary" />}
       </div>
       <div className="relative h-[150px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -64,16 +85,6 @@ export default function Carousel({ items, title, onSelect, onLockChange, initial
             disabled={isLocked}
           >
             {"<"}
-          </button>
-          <button
-            onClick={handleNext}
-            className={cn(
-              "absolute right-0 z-10 h-full px-4 text-2xl transition-colors",
-              isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
-            )}
-            disabled={isLocked}
-          >
-            {">"}
           </button>
 
           {/* Previous item */}
@@ -89,15 +100,32 @@ export default function Carousel({ items, title, onSelect, onLockChange, initial
             </div>
           </div>
 
-          {/* Current item */}
-          <div className={cn("transform transition-transform duration-300 ease-in-out", isAnimating && "scale-105")}>
-            <Image
-              src={items[currentIndex] || "/placeholder.svg"}
-              alt="Current Item"
-              width={120}
-              height={120}
-              className="object-contain"
-            />
+          {/* Current item container */}
+          <div className="relative">
+            {/* Current item */}
+            <div className={cn("transform transition-transform duration-300 ease-in-out", isAnimating && "scale-105")}>
+              <Image
+                src={items[currentIndex] || "/placeholder.svg"}
+                alt="Current Item"
+                width={120}
+                height={120}
+                className="object-contain"
+              />
+            </div>
+
+            {/* Lock button positioned to the right of the current item */}
+            <button
+              onClick={toggleLock}
+              className={cn(
+                "absolute -right-16 top-1/2 -translate-y-1/2 p-2 rounded-full transition-colors",
+                isLocked
+                  ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                  : "bg-primary text-primary-foreground hover:bg-primary/90",
+              )}
+              style={{ fontFamily: "Arial Narrow" }}
+            >
+              {isLocked ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+            </button>
           </div>
 
           {/* Next item */}
@@ -112,30 +140,19 @@ export default function Carousel({ items, title, onSelect, onLockChange, initial
               />
             </div>
           </div>
+
+          <button
+            onClick={handleNext}
+            className={cn(
+              "absolute right-0 z-10 h-full px-4 text-2xl transition-colors",
+              isLocked ? "text-gray-400 cursor-not-allowed" : "text-gray-600 hover:text-gray-900",
+            )}
+            disabled={isLocked}
+          >
+            {">"}
+          </button>
         </div>
       </div>
-      <button
-        onClick={toggleLock}
-        className={cn(
-          "mt-4 px-4 py-2 rounded-md mx-auto block transition-colors flex items-center justify-center gap-2",
-          isLocked
-            ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            : "bg-primary text-primary-foreground hover:bg-primary/90",
-        )}
-        style={{ fontFamily: "Arial Narrow" }}
-      >
-        {isLocked ? (
-          <>
-            <Unlock className="w-4 h-4" />
-            Unlock
-          </>
-        ) : (
-          <>
-            <Lock className="w-4 h-4" />
-            Lock
-          </>
-        )}
-      </button>
     </div>
   )
 }

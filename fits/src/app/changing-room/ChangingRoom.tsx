@@ -7,7 +7,7 @@ import Carousel from "./Carousel"
 const carouselItems = {
   hats: ["/assets/hat1.png", "/assets/hat2.png"],
   torsos: [
-    "/assets/shirt1.jpg",
+    "/assets/shirt1.png",
     "/assets/shirt2.png",
     "/assets/shirt3.png",
     "/assets/hoodie1.png",
@@ -15,7 +15,7 @@ const carouselItems = {
     "/assets/hoodie3.png",
   ],
   pants: ["/assets/shorts1.png", "/assets/pants1.png", "/assets/pants2.png", "/assets/pants3.png"],
-  shoes: ["/assets/shoes1.jpg", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
+  shoes: ["/assets/shoes1.png", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
 }
 
 interface LockedState {
@@ -56,18 +56,32 @@ export default function ChangingRoom() {
     }))
   }
 
-  const getRandomItem = (items: string[]) => {
-    const randomIndex = Math.floor(Math.random() * items.length)
-    return items[randomIndex]
-  }
-
   const generateRandomOutfit = () => {
-    setOutfit((prev) => ({
-      hat: lockedItems.hat ? prev.hat : getRandomItem(carouselItems.hats),
-      torso: lockedItems.torso ? prev.torso : getRandomItem(carouselItems.torsos),
-      pants: lockedItems.pants ? prev.pants : getRandomItem(carouselItems.pants),
-      shoes: lockedItems.shoes ? prev.shoes : getRandomItem(carouselItems.shoes),
-    }))
+    const newOutfit = { ...outfit }
+
+    if (!lockedItems.hat) {
+      const randomHat = Math.floor(Math.random() * carouselItems.hats.length) + 1
+      newOutfit.hat = `/assets/hat${randomHat}.png`
+    }
+
+    if (!lockedItems.torso) {
+      const isHoodie = Math.random() < 0.5
+      const randomNum = Math.floor(Math.random() * (isHoodie ? 3 : 3)) + 1
+      newOutfit.torso = `/assets/${isHoodie ? "hoodie" : "shirt"}${randomNum}.png`
+    }
+
+    if (!lockedItems.pants) {
+      const isShorts = Math.random() < 0.25
+      const randomNum = Math.floor(Math.random() * (isShorts ? 1 : 3)) + 1
+      newOutfit.pants = `/assets/${isShorts ? "shorts" : "pants"}${randomNum}.png`
+    }
+
+    if (!lockedItems.shoes) {
+      const randomShoes = Math.floor(Math.random() * carouselItems.shoes.length) + 1
+      newOutfit.shoes = `/assets/shoes${randomShoes}.png`
+    }
+
+    setOutfit(newOutfit)
   }
 
   return (
@@ -98,6 +112,7 @@ export default function ChangingRoom() {
             onSelect={(item) => updateOutfit("hat", item)}
             onLockChange={(isLocked) => handleLockChange("hat", isLocked)}
             initialLocked={lockedItems.hat}
+            currentItem={outfit.hat}
           />
           <Carousel
             items={carouselItems.torsos}
@@ -105,6 +120,7 @@ export default function ChangingRoom() {
             onSelect={(item) => updateOutfit("torso", item)}
             onLockChange={(isLocked) => handleLockChange("torso", isLocked)}
             initialLocked={lockedItems.torso}
+            currentItem={outfit.torso}
           />
           <Carousel
             items={carouselItems.pants}
@@ -112,6 +128,7 @@ export default function ChangingRoom() {
             onSelect={(item) => updateOutfit("pants", item)}
             onLockChange={(isLocked) => handleLockChange("pants", isLocked)}
             initialLocked={lockedItems.pants}
+            currentItem={outfit.pants}
           />
           <Carousel
             items={carouselItems.shoes}
@@ -119,6 +136,7 @@ export default function ChangingRoom() {
             onSelect={(item) => updateOutfit("shoes", item)}
             onLockChange={(isLocked) => handleLockChange("shoes", isLocked)}
             initialLocked={lockedItems.shoes}
+            currentItem={outfit.shoes}
           />
         </div>
       </div>
