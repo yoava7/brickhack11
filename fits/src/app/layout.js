@@ -5,8 +5,8 @@ import Header from "./header"
 
 const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
-  title: "Fits",
-  description: "Discover, organize, and style your perfect outfits",
+  title: "digiFit",
+  description: "Discover, fart, and style your perfect outfits",
 }
 
 export default function RootLayout({ children }) {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
 
         <footer className="bg-gray-800 text-white p-4 mt-8">
-          <div className="container mx-auto text-center">© 2025 Fits. All rights reserved.</div>
+          <div style={{ fontFamily: "Arial Narrow" }} className="container mx-auto text-center">© 2025 digiFit. All rights reserved. </div>
         </footer>
       </body>
     </html>

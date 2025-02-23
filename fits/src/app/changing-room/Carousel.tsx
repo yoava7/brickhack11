@@ -73,7 +73,7 @@ export default function Carousel({
       <div className="flex items-center justify-center gap-2 ">
         <h3 className="text-center font-bold">{title}</h3>
       </div>
-      <div className="relative h-[50px] overflow-hidden">
+      <div className="relative h-[60px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Navigation and content container */}
           <div className="flex items-center gap-4">
