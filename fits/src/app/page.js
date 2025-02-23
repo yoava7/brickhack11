@@ -1,4 +1,6 @@
-import Link from "next/link"
+"use client";
+import Link from "next/link";
+import UploadButton from "./components/uploadbutton"; // Ensure this path matches your project structure
 
 export default function Home() {
   return (
@@ -24,7 +26,12 @@ export default function Home() {
             <p>Mix and match to create your perfect outfit.</p>
           </Link>
         </div>
+
+        {/* Upload Button Component */}
+        <div className="mt-8 flex justify-center">
+          <UploadButton />
+        </div>
       </div>
     </div>
-  )
+  );
 }
