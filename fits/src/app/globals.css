@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: "Arial Narrow"; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   src: local("Arial Narrow"),
        url("./fonts/arialnarrow.ttf") format("truetype");
 }
@@ -21,7 +21,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  font-family: "Arial Narrow";
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 
