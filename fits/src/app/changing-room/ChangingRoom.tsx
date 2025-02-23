@@ -78,7 +78,7 @@ export default function ChangingRoom() {
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6" style={{ backgroundColor: "#FAF9F6"}}>
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
-        <p style={{ fontFamily:'Arial Narrow'}} className="text-center mb-6 text-lg">Create and visualize your outfits here.</p>
+        <p style={{ fontFamily:'Arial Narrow'}} className="text-center mb-6 text-lg">:P</p>
 
         {/* Generate Button */}
         <div style={{fontFamily:'Arial Narrow'}} className="flex justify-center mb-4">
