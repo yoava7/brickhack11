@@ -30,7 +30,7 @@ export default function Header() {
             </button>
             <div className="flex flex-col md:flex-row items-center justify-center h-full md:h-auto space-y-8 md:space-y-0 md:space-x-8">
               <li>
-                <Link href="/" className="text-gray-800 hover:text-primary transition-colors duration-300 font-serif" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/" className="text-gray-800 hover:text-primary transition-colors duration-300 font-Arial" onClick={() => setIsMenuOpen(false)}>
                   Home
                 </Link>
               </li>
