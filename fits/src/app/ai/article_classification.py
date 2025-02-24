@@ -1,7 +1,6 @@
 import torch
 import open_clip
 from PIL import Image
-import requests
 import sys
 import json
 
@@ -16,9 +15,9 @@ types = ["t-shirt", "jacket", "pants", "dress", "sweater"]
 materials = ["cotton", "denim", "leather", "wool", "silk"]
 patterns = ["solid", "striped", "floral", "plaid"]
 
-def get_clothing_attributes(image_url):
-    """Identify multiple attributes of clothing from an image using CLIP."""
-    img = Image.open(requests.get(image_url, stream=True).raw).convert("RGB")
+def get_clothing_attributes(image_path):
+    """Identify multiple attributes of clothing from a local image file using CLIP."""
+    img = Image.open(image_path).convert("RGB")
     img_tensor = preprocess(img).unsqueeze(0)
 
     with torch.no_grad():
@@ -41,14 +40,11 @@ def get_clothing_attributes(image_url):
         "pattern": find_best_match(patterns),
     }
 
-# Read image URL from command-line argument
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(json.dumps({"error": "No image URL provided"}))
+        print(json.dumps({"error": "No image file provided"}))
         sys.exit(1)
 
-    image_url = sys.argv[1]
-    attributes = get_clothing_attributes(image_url)
-
-    # Output JSON result
+    image_path = sys.argv[1]
+    attributes = get_clothing_attributes(image_path)
     print(json.dumps(attributes))
