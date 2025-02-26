@@ -1,103 +1,80 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "./Carousel";
-import { Wand2 } from "lucide-react";
+import { ClothingItem } from "../../lib/types";
 
-const carouselItems = {
-  hats: ["/assets/hat1.png", "/assets/hat2.png"],
-  torsos: [
-    "/assets/shirt1.jpg",
-    "/assets/shirt2.png",
-    "/assets/shirt3.png",
-    "/assets/hoodie1.png",
-    "/assets/hoodie2.png",
-    "/assets/hoodie3.png",
-  ],
-  pants: ["/assets/shorts1.png", "/assets/pants1.png", "/assets/pants2.png", "/assets/pants3.png"],
-  shoes: ["/assets/shoes1.jpg", "/assets/shoes2.png", "/assets/shoes3.png", "/assets/shoes4.png"],
-};
-
-interface LockedState {
-  hat: boolean;
-  torso: boolean;
-  pants: boolean;
-  shoes: boolean;
+interface ChangingRoomProps {
+  clothingItems?: ClothingItem[];
 }
 
-export default function ChangingRoom() {
-  const [outfit, setOutfit] = useState({
-    hat: carouselItems.hats[0],
-    torso: carouselItems.torsos[0],
-    pants: carouselItems.pants[0],
-    shoes: carouselItems.shoes[0],
-  });
+const ChangingRoom: React.FC<ChangingRoomProps> = () => {
+  const [clothingItems, setClothingItems] = useState<ClothingItem[]>([]);
+  const [validClothingItems, setValidClothingItems] = useState<ClothingItem[]>([]);
 
-  const [lockedItems, setLockedItems] = useState<LockedState>({
-    hat: false,
-    torso: false,
-    pants: false,
-    shoes: false,
-  });
+  useEffect(() => {
+    const fetchClothingItems = async () => {
+      try {
+        const response = await fetch("/api/get_clothes");
+        const data = await response.json();
+        if (data.clothes && Array.isArray(data.clothes)) {
+          setClothingItems(data.clothes);
+        } else {
+          console.log("No clothing items found.");
+        }
+      } catch (error) {
+        console.error("Error fetching clothing items:", error);
+      }
+    };
 
-  const updateOutfit = (category: keyof typeof outfit, item: string) => {
-    if (!lockedItems[category]) {
-      setOutfit((prevOutfit) => ({
-        ...prevOutfit,
-        [category]: item,
-      }));
+    fetchClothingItems();
+  }, []);
+
+  // Effect to filter out invalid items
+  useEffect(() => {
+    if (clothingItems && clothingItems.length > 0) {
+      const filteredItems = clothingItems.filter(item => item.image_url?.trim());
+      setValidClothingItems(filteredItems);
+    } else {
+      setValidClothingItems([]);
     }
-  };
+  }, [clothingItems]);
 
-  const handleLockChange = (category: keyof typeof outfit, isLocked: boolean) => {
-    setLockedItems((prev) => ({
-      ...prev,
-      [category]: isLocked,
-    }));
-  };
+  if (validClothingItems.length === 0) {
+    return <p>No clothing items available.</p>;
+  }
 
-  const generateRandomOutfit = () => {
-    const newOutfit = { ...outfit };
-
-    if (!lockedItems.hat) {
-      newOutfit.hat = carouselItems.hats[Math.floor(Math.random() * carouselItems.hats.length)];
-    }
-    if (!lockedItems.torso) {
-      newOutfit.torso = carouselItems.torsos[Math.floor(Math.random() * carouselItems.torsos.length)];
-    }
-    if (!lockedItems.pants) {
-      newOutfit.pants = carouselItems.pants[Math.floor(Math.random() * carouselItems.pants.length)];
-    }
-    if (!lockedItems.shoes) {
-      newOutfit.shoes = carouselItems.shoes[Math.floor(Math.random() * carouselItems.shoes.length)];
-    }
-
-    setOutfit(newOutfit);
+  // Group clothing items by category (e.g., hat, torso, pants, shoes)
+  const groupedItems = {
+    hat: validClothingItems.filter(item => item.type === "hat"),
+    torso: validClothingItems.filter(item => item.type === "t-shirt"),  // Changed from 'torso' to 't-shirt'
+    pants: validClothingItems.filter(item => item.type === "pants"),
+    shoes: validClothingItems.filter(item => item.type === "shoes"),
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-100 px-4 py-6" style={{ backgroundColor: "#FAF9F6"}}>
-      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
-        <p style={{ fontFamily:'Arial Narrow'}} className="text-center mb-6 text-lg">:P</p>
-
-        {/* Generate Button */}
-        <div style={{fontFamily:'Arial Narrow'}} className="flex justify-center mb-4">
-          <button
-            onClick={generateRandomOutfit}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-          >
-            Generate Outfit
-          </button>
-        </div>
-
-        {/* Carousels */}
-        <div className="flex flex-col items-center gap-4 w-full">
-          <Carousel items={carouselItems.hats} title="" onSelect={(item) => updateOutfit("hat", item)} onLockChange={(isLocked) => handleLockChange("hat", isLocked)} initialLocked={lockedItems.hat} currentItem={outfit.hat} />
-          <Carousel items={carouselItems.torsos} title="" onSelect={(item) => updateOutfit("torso", item)} onLockChange={(isLocked) => handleLockChange("torso", isLocked)} initialLocked={lockedItems.torso} currentItem={outfit.torso} />
-          <Carousel items={carouselItems.pants} title="" onSelect={(item) => updateOutfit("pants", item)} onLockChange={(isLocked) => handleLockChange("pants", isLocked)} initialLocked={lockedItems.pants} currentItem={outfit.pants} />
-          <Carousel items={carouselItems.shoes} title="" onSelect={(item) => updateOutfit("shoes", item)} onLockChange={(isLocked) => handleLockChange("shoes", isLocked)} initialLocked={lockedItems.shoes} currentItem={outfit.shoes} />
-        </div>
+    <div>
+      <h2>Changing Room</h2>
+      <div className="flex flex-col items-center space-y-6">
+        {Object.keys(groupedItems).map((category) => {
+          const items = groupedItems[category as keyof typeof groupedItems];
+          return (
+            <Carousel
+              key={category}
+              items={items.map(item => item.image_url)}
+              title={category.charAt(0).toUpperCase() + category.slice(1)}
+              onSelect={(selectedUrl) => {
+                const selectedItem = items.find(item => item.image_url === selectedUrl);
+                if (selectedItem) {
+                  console.log("Selected Item:", selectedItem);
+                }
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );
-}
+};
+
+export default ChangingRoom;

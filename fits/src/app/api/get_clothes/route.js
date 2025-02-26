@@ -18,10 +18,8 @@ export async function GET(req) {
       }
     });
   }).catch((err) => {
-    // Handle errors
     return NextResponse.json({ error: 'Server error', details: err.message }, { status: 500 });
   }).finally(() => {
-    // Close the database connection
     connection.end();
   });
 }

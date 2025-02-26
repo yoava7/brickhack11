@@ -1,0 +1,15 @@
+{
+    "attributes": {
+      "colors": ["red", "blue", "green", "black", "white", "yellow"],
+      "types": ["t-shirt", "jacket", "pants", "dress", "sweater", "shoes", "hat"],
+      "materials": ["cotton", "denim", "leather", "wool", "silk"],
+      "patterns": ["solid", "striped", "floral", "plaid"]
+    },
+    "slots": {
+      "torso": ["t-shirt", "jacket", "dress", "sweater"],
+      "pants": ["pants"],
+      "shoes": ["shoes"],
+      "hats": ["hat"]
+    }
+  }
+  

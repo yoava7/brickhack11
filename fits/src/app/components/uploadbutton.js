@@ -14,6 +14,7 @@ export default function UploadButton() {
 
     const formData = new FormData();
     formData.append("image", file);
+    setMessage("Processing Image... ")
 
     try {
       const response = await fetch("/api/insert_clothing", {
